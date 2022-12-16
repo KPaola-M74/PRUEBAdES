@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
+import { Link, Container, Typography, Divider, Stack, Button, ImageList, Avatar, Box } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -14,14 +14,20 @@ import { LoginForm } from '../sections/auth/login';
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
-    display: 'flex', width: '100%', 
+    display: 'flex', width: '100%',
+  },
+}));
+
+const StyledRoot2 = styled('div')(({ theme }) => ({
+  [theme.breakpoints.up('md')]: {
+    display: 'flex', width: '100%', flexDirection: 'column',
   },
 }));
 
 const StyledSection = styled('div')(({ theme }) => ({
   width: '100%',
   height: '100%',
-  
+
   maxWidth: 480,
   display: 'flex',
   flexDirection: 'column',
@@ -54,35 +60,38 @@ export default function LoginPage() {
       </Helmet>
 
       <StyledRoot>
-        <Logo
-          sx={{
-            position: 'fixed',
-            top:  { xs: 16, sm: 24, md: 40 },
-            left: { xs: 16, sm: 24, md: 1100 },
-          }}
-        />
+
+
+
 
         {mdUp && (
-          <StyledSection>
-            
-            <img src="/assets/bg-login3.jpg" alt="login" />
-          </StyledSection>
+          <Avatar variant='rounded' alt="login" src={"/static/bg-login3.jpg"} style={{
+            width: 'auto',
+            height: '100vh',
+          }} />
         )}
 
-        <Container maxWidth="sm">
-          <StyledContent>
-            <Typography variant="h2" gutterBottom>
-              Bienvenid@
-            </Typography>
+        <StyledRoot2>
+          <Container maxWidth="sm">
+            <StyledContent>
+              <Typography variant="h2" gutterBottom>
+                Bienvenid@
+              </Typography>
 
-            <Typography variant="body2" sx={{ mb: 5 }}>
-              ¿No tienes una cuenta? {''}
-              <Link variant="subtitle2">Crea una</Link>
-            </Typography>
+              <Typography variant="body2" sx={{ mb: 5 }}>
+                ¿No tienes una cuenta? {''}
+                <Link variant="subtitle2">Crea una</Link>
+              </Typography>
 
-            <LoginForm />
-          </StyledContent>
-        </Container>
+              <LoginForm />
+            </StyledContent>
+          </Container>
+          {mdUp && (
+            <Box sx={{ px: 5, py: 4, position: 'absolute', alignSelf: 'end' }}>
+              <Logo />
+            </Box>
+          )}
+        </StyledRoot2>
       </StyledRoot>
     </>
   );
