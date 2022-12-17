@@ -207,7 +207,8 @@ class Usuario(models.Model):
     correo_electronico = models.CharField(max_length=100)
     estado_usuario = models.CharField(max_length=100)
     id_tipo_usuario = models.ForeignKey(Tipousuario, models.DO_NOTHING, db_column='id_tipo_usuario')
-
+    contrasena = models.CharField(max_length=100)
+    
     class Meta:
         managed = False
         db_table = 'usuario'

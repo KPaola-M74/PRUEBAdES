@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
+from rest_framework import routers
+from loginPage import views
+
+router = routers.DefaultRouter()
+router.register(r'usuarios',views.UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('(?!.*(static))', TemplateView.as_view(template_name="index.html", content_type="text/html"))
-    #path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(router.urls)),
+    re_path(r'.*', TemplateView.as_view(template_name="index.html", content_type="text/html"))
 ]
